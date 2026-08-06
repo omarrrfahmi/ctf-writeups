@@ -9,6 +9,8 @@ Forensics
 ## Difficulty
 Hard
 
+![Challenge Overview](Images/Picture2.png)
+
 ## Challenge Description
 
 *Challenge description not provided.*
@@ -24,13 +26,25 @@ Hard
 
 ### Step 1 - Initial Analysis
 
-Starting off, the first move was checking what kind of file had been handed over to ensure it wasn’t disguised under a false name. Using basic terminal tools, a close look at the file’s actual structure took place, stripping away any surface-level confusion about its real identity. Following this, provided clues were studied one by one to narrow down possible hiding spots for data, cutting out random guesses. To maintain absolute certainty before proceeding with advanced manipulation, I performed a secondary, more granular file type and metadata analysis to verify the exact encoding parameters and structural headers. 
+![Initial File Analysis](Images/Picture1.png)
+
+Starting off, the first move was checking what kind of file had been handed over to ensure it wasn’t disguised under a false name. Using basic terminal tools, a close look at the file’s actual structure took place, stripping away any surface-level confusion about its real identity. Following this, provided clues were studied one by one to narrow down possible hiding spots for data, cutting out random guesses.
+
+![Metadata Analysis](Images/Picture3.png)
+
+To maintain absolute certainty before proceeding with advanced manipulation, I performed a secondary, more granular file type and metadata analysis to verify the exact encoding parameters and structural headers.
 
 ### Step 2 - Discovery
 
+![FFmpeg Extraction](Images/Picture4.png)
+
 With every structural detail locked in place, the next step unfolded through a detailed `ffmpeg` sequence aimed at rendering the entire audio pathway. Because precision mattered most, this method pulled out all sound elements without compression—leaving nothing behind. Hidden layers, extra tracks, and tucked-away metadata all stayed visible, avoiding gaps that might have slipped past earlier scans.
 
+![Audio Processing](Images/Picture5.png)
+
 ### Step 3 - Extraction
+
+![Sox Filtering](Images/Picture6.png)
 
 Midway through the review, signs pointed to hidden patterns in high-frequency segments. Using `sox`, a narrow slice of sound came into focus. I applied a targeted bandpass filter set between 15,000 Hz and 18,000 Hz, fading out surrounding noise. What remained was exactly the range where encoded signals often hide, cleanly removing the dominant lower tones.
 
@@ -43,6 +57,7 @@ Looking closely at the spectrogram revealed a clear structure: vertical segments
 Starting from the highest frequency row, I moved step by step through each layer of patterns, noting the on-off values in order. Because every segment held six digits, grouping them that way made decoding straightforward. After lining up those sets, I translated each cluster into a character, slowly forming parts of a larger sequence. When all pieces came together correctly, the structure matched what was expected and revealed the flag.
 
 ## Flag
+
 IIITL{st3r30_5p3c7r0g4r4m_h1dd3n}
 
 ## Lessons Learned
